@@ -19,3 +19,26 @@
     - Node.js
 
 If possible, I will eventually add a User Chat functionality using websockets, as well as AI generated posts using GPT-3. (no promises tho XOXO) 
+
+
+## How to run
+ ### Backend
+    ```bash
+        cd backend
+        npm run start 
+    ```
+### Frontend
+    ```bash
+        cd frontend
+        ng serve 
+    ```
+
+## How to test
+ ### Backend
+    ```bash
+        cd backend
+        npm run test 
+    ```
+
+ ### Frontend
+ Whenever I add E2E tests with Angular lmao
