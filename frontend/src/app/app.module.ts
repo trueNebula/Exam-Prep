@@ -25,7 +25,9 @@ import { HomeComponent } from './pages/home/home.component';
 import { PostFormComponent } from './pages/home/components/post-form/post-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PostListComponent } from './pages/home/components/post-list/post-list.component';
-import { PostListItemComponent } from './pages/home/components/post-list-item/post-list-item.component'
+import { PostListItemComponent } from './pages/home/components/post-list-item/post-list-item.component';
+import { LoginComponent } from './pages/login/login/login.component';
+import { LoginFormComponent } from './pages/login/components/login-form/login-form.component'
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { PostListItemComponent } from './pages/home/components/post-list-item/po
     HomeComponent,
     PostFormComponent,
     PostListComponent,
-    PostListItemComponent
+    PostListItemComponent,
+    LoginComponent,
+    LoginFormComponent
   ],
   imports: [
     BrowserModule,
