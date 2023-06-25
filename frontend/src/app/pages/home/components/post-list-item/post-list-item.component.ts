@@ -21,4 +21,8 @@ export class PostListItemComponent {
   date: string | undefined;
   creator: string | undefined;
 
+  handleOnDelete() {
+    console.log('delete ', this.title)
+  }
+
 }

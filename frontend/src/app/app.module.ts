@@ -18,6 +18,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox'; 
 import { MatListModule } from '@angular/material/list'; 
 import { MatDividerModule } from '@angular/material/divider';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -43,7 +44,6 @@ import { PostListItemComponent } from './pages/home/components/post-list-item/po
     MatButtonModule,
     MatInputModule,
     MatFormFieldModule,
-    MatTableModule,
     MatTabsModule,
     MatToolbarModule,
     MatSnackBarModule,
@@ -52,6 +52,7 @@ import { PostListItemComponent } from './pages/home/components/post-list-item/po
     MatCheckboxModule,
     MatListModule,
     MatDividerModule,
+    MatMenuModule,
 
     FormsModule,
     ReactiveFormsModule,

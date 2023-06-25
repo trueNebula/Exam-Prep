@@ -14,10 +14,20 @@ export class PostsService {
   }
 
   createPost(post: Post) {
-    console.log(post);
-
-    //return this.axios.post('http://localhost:3000/api/posts', post);
-
+    return this.axios.post('http://localhost:3000/api/posts', post);
   }
+
+  getPosts() {
+    return this.axios.get('http://localhost:3000/api/posts');
+  }
+
+  updatePost(post: Post) {
+    return this.axios.put('http://localhost:3000/api/posts', post);
+  }
+
+  deletePost(post: Post) {
+    return this.axios.delete('http://localhost:3000/api/posts', { data: post });
+  }
+  
 
 }

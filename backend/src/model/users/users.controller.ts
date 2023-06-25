@@ -4,7 +4,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { Role } from 'src/auth/role.enum';
 
-@Controller('user')
+@Controller('api/user')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 

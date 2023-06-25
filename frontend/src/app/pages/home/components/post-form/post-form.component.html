@@ -1,4 +1,4 @@
-<form class="form-container my-10">
+<form class="form-container my-10" [formGroup]="form">
     <mat-card class="max-w-3xl mx-auto">
         <mat-card-header>
             <mat-card-title class="text-white">Create New Post</mat-card-title>
@@ -6,18 +6,18 @@
         <mat-card-content class="flex flex-col justify-center">
             <mat-form-field class="w-full my-2">
                 <mat-label>Title</mat-label>
-                <input matInput [formControl]="title">
+                <input matInput formControlName="title">
             </mat-form-field>
             <mat-form-field class="w-full my-2">
                 <mat-label>Content</mat-label>
-                <textarea matInput placeholder="..." [formControl]="content"></textarea>
+                <textarea matInput placeholder="..." formControlName="content"></textarea>
             </mat-form-field>
             <div class="md-2">
-                <mat-checkbox matInput [formControl]="visibility">Public?</mat-checkbox>
+                <mat-checkbox matInput formControlName="visibility">Public?</mat-checkbox>
             </div>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-raised-button color="primary" class="my-2" (click)="createPost()">Post</button>
+            <button mat-raised-button color="primary" class="my-2" (click)="handleOnSubmit()" [disabled]="form.invalid">Post</button>
         </mat-card-actions>
     </mat-card>
 </form>
