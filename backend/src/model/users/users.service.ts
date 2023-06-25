@@ -28,18 +28,25 @@ export class UsersService {
     const skip = (page - 1) * take;
     const keyword = query.keyword || "";
 
-    const users = await this.dataSource
-      .createQueryBuilder()
-      .select("user")
-      .from(User, "user")
-      .where("user.name LIKE :keyword", { keyword: `%${keyword}%` })
-      .orWhere("user.role LIKE :keyword", { keyword: `%${keyword}%` })      
-      .orderBy("post.id", "ASC")
-      .take(take)
-      .skip(skip)
-      .getMany();
+    const [users, count] = await Promise.all([
+      this.dataSource
+        .createQueryBuilder()
+        .select("user")
+        .from(User, "user")
+        .where("user.name LIKE :keyword", { keyword: `%${keyword}%` })
+        .orderBy("user.id", "ASC")
+        .take(take)
+        .skip(skip)
+        .getMany(),
+  
+      this.dataSource
+        .createQueryBuilder()
+        .select("COUNT(*)", "count")
+        .from(User, "user")
+        .getRawOne()
+    ]);
 
-    return users;
+    return [users, count];
   }
 
   async findOne(id: number) {

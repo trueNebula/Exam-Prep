@@ -42,7 +42,9 @@ export class PostListComponent implements OnInit {
 
   realPosts: Post[] = [];
   postsLoaded = false;
+  take = 5;
   currPage = 1;
+  postCount = 0;
 
   constructor(private api: PostsService) {}
 
@@ -52,8 +54,9 @@ export class PostListComponent implements OnInit {
 
   private getPosts(page: number=1) {
     console.log(page);
-    this.api.getPosts(page).then((res:any) => {
-      this.realPosts = res.data;
+    this.api.getPosts(page, this.take).then((res:any) => {
+      this.realPosts = res.data[0];
+      this.postCount = res.data[1].count;
       this.postsLoaded = true;
     });
   }
@@ -69,6 +72,7 @@ export class PostListComponent implements OnInit {
   }
 
   onChangePageNext() {
+    if (this.currPage >= Math.ceil(this.postCount / this.take)) return;
     this.getPosts(++this.currPage);
   }
 
