@@ -21,13 +21,12 @@ export class PostsService {
     return this.axios.get('http://localhost:3000/api/posts');
   }
 
-  updatePost(post: Post) {
+  updatePost(post: Post, id: number) {
     return this.axios.put('http://localhost:3000/api/posts', post);
   }
 
-  deletePost(post: Post) {
-    return this.axios.delete('http://localhost:3000/api/posts', { data: post });
+  deletePost(id: number) {
+    return this.axios.delete(`http://localhost:3000/api/posts/${id}`);
   }
   
-
 }

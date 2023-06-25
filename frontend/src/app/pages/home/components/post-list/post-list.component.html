@@ -1,11 +1,11 @@
-<mat-card class="max-w-3xl mx-auto my-10 text-white">
+<mat-card class="max-w-3xl mx-auto my-5 text-white">
     <mat-card-header>
         <mat-card-title>Posts</mat-card-title>
     </mat-card-header>
-    <mat-card-content >
-        <mat-list #posts>
-            <div *ngFor="let post of mockPosts"  class="my-5">
-                <app-post-list-item *ngIf="post.visibility == 'public'" [post]=post></app-post-list-item>
+    <mat-card-content>
+        <mat-list #posts *ngIf="postsLoaded">
+            <div *ngFor="let post of realPosts" class="my-5">
+                <app-post-list-item *ngIf="post.visibility == 'public'" [post]=post (forceRefresh)="refreshList($event)"></app-post-list-item>
             </div>
         </mat-list>
     </mat-card-content>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { PostsService } from 'src/app/services/posts/posts.service';
 
@@ -11,6 +11,8 @@ export class PostFormComponent implements OnInit {
   form!: FormGroup;
   constructor(private fb: FormBuilder, private api: PostsService) {}
   
+  @Output() postAddedEvent = new EventEmitter<string>();
+
   ngOnInit() {
     this.form = this.fb.group({
       title: ['', Validators.required],
@@ -51,6 +53,7 @@ export class PostFormComponent implements OnInit {
       creator: creator
     }).then((response: any) => {
       console.log(response.data);
+      this.postAddedEvent.emit();
     }).catch((error: any) => {
       console.log(error);
     });

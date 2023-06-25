@@ -1,4 +1,5 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject, Input, Output, EventEmitter } from '@angular/core';
+import { PostsService } from 'src/app/services/posts/posts.service';
 
 @Component({
   selector: 'app-post-list-item',
@@ -6,8 +7,10 @@ import { Component, Inject, Input } from '@angular/core';
   styleUrls: ['./post-list-item.component.scss']
 })
 export class PostListItemComponent {
+  constructor(private api: PostsService) {}
   @Input() set post(value: any) {
-    const { title, content, visibility, date, creator} = value;
+    const { id, title, content, visibility, date, creator} = value;
+    this.id = id;
     this.title = title;
     this.content = content;
     this.visibility = visibility;
@@ -15,6 +18,9 @@ export class PostListItemComponent {
     this.creator = creator;
   };
 
+  @Output() forceRefresh: EventEmitter<string> = new EventEmitter<string>();
+
+  id?: number
   title: string | undefined;
   content: string | undefined;
   visibility: string | undefined;
@@ -22,7 +28,19 @@ export class PostListItemComponent {
   creator: string | undefined;
 
   handleOnDelete() {
-    console.log('delete ', this.title)
+    console.log('delete ', this.id);
+
+    if(this.id == undefined) {
+      console.log("undefined id");
+      return;
+    }
+
+    this.api.deletePost(this.id).then((response: any) => {
+      this.forceRefresh.emit('refresh');
+    }
+    ).catch((error: any) => {
+      console.log(error);
+    });
   }
 
 }
