@@ -22,14 +22,24 @@ export class PostsService {
     return response;
   }
 
-  async findAll() {
-    const users = await this.dataSource
+  async findAll(query) {
+    const take = query.take || 10;
+    const page = query.page || 1;
+    const skip = (page - 1) * take;
+    const keyword = query.keyword || "";
+
+    const posts = await this.dataSource
       .createQueryBuilder()
       .select("post")
       .from(Post, "post")
+      .where("post.title LIKE :keyword", { keyword: `%${keyword}%` })
+      .orWhere("post.content LIKE :keyword", { keyword: `%${keyword}%` })
+      .orderBy("post.id", "ASC")
+      .take(take)
+      .skip(skip)
       .getMany();
 
-    return users;
+    return posts;
   }
 
   async findOne(id: number) {
