@@ -5,7 +5,7 @@
     <mat-card-content>
         <mat-list #posts *ngIf="postsLoaded">
             <div *ngFor="let post of realPosts" class="my-5">
-                <app-post-list-item *ngIf="post.visibility == 'public'" [post]=post (forceRefresh)="refreshList($event)"></app-post-list-item>
+                <app-post-list-item *ngIf="post.visibility == 'public'" [post]=post (forceRefresh)="refreshList($event)" [canModerate]="canModerate"></app-post-list-item>
             </div>
         </mat-list>
         <mat-spinner *ngIf="!postsLoaded"></mat-spinner>

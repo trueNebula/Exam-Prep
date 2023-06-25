@@ -16,6 +16,5 @@ export class HeaderComponent {
   @Input() 
   public set setUserData(value: LoggedUser) {
     this.userData = value;
-    console.log(this.userData);
   }
 }

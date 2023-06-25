@@ -9,7 +9,7 @@
                 <p>{{content}}</p>
                 <p>{{date}}</p>
             </div>
-            <button class="w-1/2" mat-icon-button aria-label="Example icon button with a vertical three dot icon" [matMenuTriggerFor]="postOptions">
+            <button class="w-1/2" mat-icon-button aria-label="Example icon button with a vertical three dot icon" [matMenuTriggerFor]="postOptions" *ngIf="canModerate == true">
                 <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #postOptions="matMenu">

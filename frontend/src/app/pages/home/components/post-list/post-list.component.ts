@@ -14,6 +14,9 @@ export class PostListComponent implements OnInit {
     this.getPosts();
   }
 
+  @Input()
+  canModerate = false;
+
   mockPosts = [
     {
       "id": 3,

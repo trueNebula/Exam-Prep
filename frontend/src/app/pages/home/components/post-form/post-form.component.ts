@@ -1,7 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { LoggedUser } from 'src/app/model/loggedUser';
 import { PostsService } from 'src/app/services/posts/posts.service';
+import { SharedService } from 'src/app/services/shared/shared.service';
 
 @Component({
   selector: 'app-post-form',
@@ -10,7 +12,17 @@ import { PostsService } from 'src/app/services/posts/posts.service';
 })
 export class PostFormComponent implements OnInit {
   form!: FormGroup;
-  constructor(private fb: FormBuilder, private api: PostsService, private snackBar: MatSnackBar) {}
+  constructor(private fb: FormBuilder, private api: PostsService, private snackBar: MatSnackBar, private sharedService: SharedService) {
+    sharedService.changeEmitted$.subscribe(
+      user => {
+        this.user = user;
+      }
+    );
+  }
+
+  user: LoggedUser = {
+    role: 'anon'
+  };
   
   @Output() postAddedEvent = new EventEmitter<string>();
 

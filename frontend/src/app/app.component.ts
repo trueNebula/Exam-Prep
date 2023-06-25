@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { LoggedUser } from './model/loggedUser';
 import { SharedService } from './services/shared/shared.service';
+import { HomeComponent } from './pages/home/home.component';
+import { LoginComponent } from './pages/login/login/login.component';
 
 @Component({
   selector: 'app-root',
@@ -20,4 +22,10 @@ export class AppComponent {
     role: 'anon'
   };
 
+  onOutletLoaded(component: HomeComponent | LoginComponent) {
+    if (component instanceof HomeComponent) {
+      component.user = this.user;
+    } else if (component instanceof LoginComponent) {
+    }
+  }
 }

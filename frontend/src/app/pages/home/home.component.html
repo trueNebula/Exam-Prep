@@ -1,4 +1,4 @@
 <mat-card class="max-w-7xl mx-auto bg-card top-50">
-    <app-post-form (postAddedEvent)="receivePostAdded($event)"></app-post-form>
-    <app-post-list [value]="postAdded"></app-post-list>
+    <app-post-form *ngIf="user.role !== 'anon'" (postAddedEvent)="receivePostAdded($event)"></app-post-form>
+    <app-post-list [value]="postAdded" [canModerate]="user.role ==='moderator' || user.role === 'admin'"></app-post-list>
 </mat-card>

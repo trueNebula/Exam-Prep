@@ -18,6 +18,8 @@ export class PostListItemComponent {
     this.date = date;
     this.creator = creator;
   };
+  @Input()
+  canModerate = false;
 
   @Output() forceRefresh: EventEmitter<string> = new EventEmitter<string>();
 
