@@ -8,7 +8,7 @@
             "dependsOn": [
               "frontend",
               "backend",
-              "sql"
+              "ng cli"
             ],
             // Mark as the default build task so cmd/ctrl+shift+b will create them
             "group": {
@@ -44,15 +44,15 @@
             // Create the tasks in a terminal group
           },
           {
-            "label": "backend",
+            "label": "ng cli",
             "type": "shell",
-            "command": "cd ../backend",
+            "command": "cd ../frontend/src/app",
             "icon": {
-                "id": "log-out",
-                "color": "terminal.ansiBlue"
+                "id": "console",
+                "color": "terminal.ansiGreen"
             },
             "options": {
-              "cwd": "${workspaceFolder}/backend",
+              "cwd": "${workspaceFolder}/frontend/src/app",
               "shell": {
                 "executable": "cmd.exe",
                 "args": [],
@@ -62,15 +62,15 @@
             "problemMatcher": [],
           },
           {
-            "label": "sql",
+            "label": "backend",
             "type": "shell",
-            "command": "cd ../backend/SQL",
+            "command": "cd ../backend",
             "icon": {
-                "id": "folder",
-                "color": "terminal.ansiGreen"
+                "id": "log-out",
+                "color": "terminal.ansiBlue"
             },
             "options": {
-              "cwd": "${workspaceFolder}/backend/SQL",
+              "cwd": "${workspaceFolder}/backend",
               "shell": {
                 "executable": "cmd.exe",
                 "args": [],

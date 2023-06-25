@@ -1,0 +1,18 @@
+<mat-card class="max-w-3xl mx-auto my-10">
+    <mat-card-header>
+        <mat-card-title class="text-white">Posts</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-selection-list #posts [multiple]="false" >
+            <div *ngFor="let post of mockPosts">
+                <mat-list-option *ngIf="post.visibility == 'public'" [value]="post" [style.height]="'200px'">
+                    <app-post-list-item [post]=post></app-post-list-item>
+                </mat-list-option>
+            </div>
+        </mat-selection-list>
+        <p>
+            Selected: {{posts.selectedOptions.hasValue() ? posts.selectedOptions.selected[0].value.title : 'None'}}
+        </p>
+    </mat-card-content>
+</mat-card>
+
