@@ -22,11 +22,21 @@ export class UsersService {
     return response;
   }
 
-  async findAll() {
+  async findAll(query) {
+    const take = query.take || 10;
+    const page = query.page || 1;
+    const skip = (page - 1) * take;
+    const keyword = query.keyword || "";
+
     const users = await this.dataSource
       .createQueryBuilder()
       .select("user")
       .from(User, "user")
+      .where("user.name LIKE :keyword", { keyword: `%${keyword}%` })
+      .orWhere("user.role LIKE :keyword", { keyword: `%${keyword}%` })      
+      .orderBy("post.id", "ASC")
+      .take(take)
+      .skip(skip)
       .getMany();
 
     return users;
