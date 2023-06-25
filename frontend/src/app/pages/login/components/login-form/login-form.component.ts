@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login/login.service';
+import { SharedService } from 'src/app/services/shared/shared.service';
+import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-login-form',
@@ -10,7 +13,7 @@ import { LoginService } from 'src/app/services/login/login.service';
 })
 export class LoginFormComponent {
   form!: FormGroup;
-  constructor(private fb: FormBuilder, private api: LoginService ,private snackBar: MatSnackBar,) {}
+  constructor(private fb: FormBuilder, private api: LoginService ,private snackBar: MatSnackBar, private router: Router, private sharedService: SharedService) {}
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -28,8 +31,11 @@ export class LoginFormComponent {
       name: username,
       password: password,
     }).then((response: any) => {
-      console.log(response.data);
+      const decodedToken = this.getDecodedAccessToken(response.data.access_token);
+
+      this.sharedService.emitChange({username: decodedToken.username, role: decodedToken.role});
       this.openSnackBar("Login successful!", "Close");
+      this.router.navigate(['/home']);
 
     }).catch((error: any) => {
       console.log(error);
@@ -39,8 +45,22 @@ export class LoginFormComponent {
 
   }
  
+  handleLoginAsAnon(){
+    this.sharedService.emitChange({role: "anon"});
+    this.openSnackBar("Welcome!", "Close");
+    this.router.navigate(['/home']);
+  }
+
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, { duration: 5000 });
+  }
+
+  private getDecodedAccessToken(token: string): any {
+    try {
+      return jwt_decode(token);
+    } catch(Error) {
+      return null;
+    }
   }
 
 }

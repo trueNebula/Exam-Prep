@@ -28,6 +28,7 @@ import { PostListComponent } from './pages/home/components/post-list/post-list.c
 import { PostListItemComponent } from './pages/home/components/post-list-item/post-list-item.component';
 import { LoginComponent } from './pages/login/login/login.component';
 import { LoginFormComponent } from './pages/login/components/login-form/login-form.component'
+import { SharedService } from './services/shared/shared.service';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,7 @@ import { LoginFormComponent } from './pages/login/components/login-form/login-fo
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [SharedService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

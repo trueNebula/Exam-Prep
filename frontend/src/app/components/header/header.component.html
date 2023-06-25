@@ -1,6 +1,9 @@
 <mat-toolbar class="max-w-7xl mx-auto justify-between">
     <a routerLink="/">Blog</a>
-    <button mat-icon-button>
-        <mat-icon>account_circle</mat-icon>
-    </button>
+    <div class="flex flex-row-reverse justify-between items-center">
+        <button mat-icon-button>
+            <mat-icon>account_circle</mat-icon>
+        </button>
+        <span class="py-3">{{userData.username}}</span>
+    </div>
 </mat-toolbar>
