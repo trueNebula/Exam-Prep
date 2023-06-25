@@ -42,15 +42,17 @@ export class PostListComponent implements OnInit {
 
   realPosts: Post[] = [];
   postsLoaded = false;
+  currPage = 1;
 
   constructor(private api: PostsService) {}
 
   ngOnInit() {
-    this.getPosts();
+    this.getPosts(this.currPage);
   }
 
-  private getPosts() {
-    this.api.getPosts().then((res:any) => {
+  private getPosts(page: number=1) {
+    console.log(page);
+    this.api.getPosts(page).then((res:any) => {
       this.realPosts = res.data;
       this.postsLoaded = true;
     });
@@ -59,6 +61,15 @@ export class PostListComponent implements OnInit {
   refreshList(value: any) {
     console.log("refreshing list");
     this.getPosts();
+  }
+
+  onChangePagePrev() {
+    if (this.currPage <= 1) return;
+    this.getPosts(--this.currPage);
+  }
+
+  onChangePageNext() {
+    this.getPosts(++this.currPage);
   }
 
 }

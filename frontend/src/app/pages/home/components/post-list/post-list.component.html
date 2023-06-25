@@ -8,6 +8,15 @@
                 <app-post-list-item *ngIf="post.visibility == 'public'" [post]=post (forceRefresh)="refreshList($event)"></app-post-list-item>
             </div>
         </mat-list>
+        <mat-spinner *ngIf="!postsLoaded"></mat-spinner>
+        <div class="w-1/3 mx-auto flex flex-row justify-between">
+            <button mat-icon-button (click)="onChangePagePrev()">
+                <mat-icon>keyboard_arrow_left</mat-icon>
+            </button>
+            <button mat-icon-button (click)="onChangePageNext()">
+                <mat-icon>keyboard_arrow_right</mat-icon>
+            </button>
+        </div>
     </mat-card-content>
 </mat-card>
 

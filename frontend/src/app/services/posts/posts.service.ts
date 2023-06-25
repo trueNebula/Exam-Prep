@@ -17,8 +17,8 @@ export class PostsService {
     return this.axios.post('http://localhost:3000/api/posts', post);
   }
 
-  getPosts() {
-    return this.axios.get('http://localhost:3000/api/posts');
+  getPosts(page: number, take: number = 5) {
+    return this.axios.get(`http://localhost:3000/api/posts?page=${page}&take=${take}`);
   }
 
   updatePost(post: Post, id: number) {

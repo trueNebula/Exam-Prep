@@ -19,6 +19,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatListModule } from '@angular/material/list'; 
 import { MatDividerModule } from '@angular/material/divider';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -53,6 +54,7 @@ import { PostListItemComponent } from './pages/home/components/post-list-item/po
     MatListModule,
     MatDividerModule,
     MatMenuModule,
+    MatProgressSpinnerModule,
 
     FormsModule,
     ReactiveFormsModule,
