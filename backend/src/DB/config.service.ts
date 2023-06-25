@@ -26,7 +26,7 @@ class ConfigService {
 
     }
     
-    public getTypeOrmConfig(): TypeOrmModuleOptions {
+    public getConfig(): TypeOrmModuleOptions {
         return {
             type: 'postgres',
 
@@ -44,6 +44,26 @@ class ConfigService {
 
             synchronize: true,
             logging: true,
+
+        }
+
+    }
+    
+    public getTestConfig(): TypeOrmModuleOptions {
+        return {
+            type: 'postgres',
+
+            host: this.getValue('DATABASE_HOST'),
+            port: parseInt(this.getPort()),
+            username: this.getValue('DATABASE_USER'),
+            password: this.getValue('DATABASE_PASSWORD'),
+            database: this.getValue('DATABASE_DB'),
+
+            entities: [__dirname + '/../**/*.entity.{js,ts}'],
+
+            synchronize: false,
+            logging: false,
+
 
         }
 

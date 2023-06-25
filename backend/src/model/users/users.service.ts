@@ -8,26 +8,61 @@ import { User } from './entities/user.entity';
 export class UsersService {
   constructor(private dataSource: DataSource) {}
 
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+  async create(createUserDto: CreateUserDto) {
+    const { name, password, role } = createUserDto;
+    const response = await this.dataSource
+      .createQueryBuilder()
+      .insert()
+      .into(User)
+      .values([
+        { name: name, password: password, role: role }
+      ])
+      .execute();
+
+    return response;
   }
 
   async findAll() {
-    //return `This action returns all users`;
-    await this.dataSource.transaction(async manager => {
-      await manager.find(User);
-    })
+    const users = await this.dataSource
+      .createQueryBuilder()
+      .select("user")
+      .from(User, "user")
+      .getMany();
+
+    return users;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id: number) {
+    const user = await this.dataSource
+      .createQueryBuilder()
+      .select("user")
+      .from(User, "user")
+      .where("user.id = :id", { id: id })
+      .getOne();
+
+      return user;
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: number, updateUserDto: UpdateUserDto) {
+    const { name, password, role, posts } = updateUserDto;
+    const response = await this.dataSource
+      .createQueryBuilder()
+      .update(User)
+      .set({ name: name, password: password, role: role, posts: posts })
+      .where("id = :id", { id: id })
+      .execute();
+
+    return response;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: number) {
+    const response = await this.dataSource
+      .createQueryBuilder()
+      .delete()
+      .from(User)
+      .where("id = :id", { id: id })
+      .execute();
+
+    return response;
   }
 }
