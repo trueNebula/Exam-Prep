@@ -43,6 +43,17 @@ export class UsersService {
       return user;
   }
 
+  async findByName(username: string) {
+    const user = await this.dataSource
+      .createQueryBuilder()
+      .select("user")
+      .from(User, "user")
+      .where("user.name = :name", { name: username })
+      .getOne();
+
+      return user;
+  }
+
   async update(id: number, updateUserDto: UpdateUserDto) {
     const { name, password, role, posts } = updateUserDto;
     const response = await this.dataSource

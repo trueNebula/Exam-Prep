@@ -1,5 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { Post } from '../../posts/entities/post.entity';
+import { Exclude } from '@nestjs/class-transformer';
+import { Role } from 'src/auth/role.enum';
 
 @Entity()
 export class User {
@@ -10,10 +12,11 @@ export class User {
     name: string;
 
     @Column()
+    @Exclude()
     password: string;
 
     @Column()
-    role: string;
+    role: Role;
 
     @OneToMany(() => Post, (post: Post) => post.user)
     posts: Post[]
