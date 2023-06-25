@@ -1,15 +1,16 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { PostsService } from 'src/app/services/posts/posts.service';
 
 @Component({
   selector: 'app-post-form',
   templateUrl: './post-form.component.html',
-  styleUrls: ['./post-form.component.scss']
+  styleUrls: ['./post-form.component.scss'],
 })
 export class PostFormComponent implements OnInit {
   form!: FormGroup;
-  constructor(private fb: FormBuilder, private api: PostsService) {}
+  constructor(private fb: FormBuilder, private api: PostsService, private snackBar: MatSnackBar) {}
   
   @Output() postAddedEvent = new EventEmitter<string>();
 
@@ -54,10 +55,15 @@ export class PostFormComponent implements OnInit {
     }).then((response: any) => {
       console.log(response.data);
       this.postAddedEvent.emit();
+      this.openSnackBar("Post added!", "Close");
     }).catch((error: any) => {
       console.log(error);
     });
     
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, { duration: 5000 });
   }
 
 }
